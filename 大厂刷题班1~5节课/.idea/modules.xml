@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ProjectModuleManager">
+    <modules>
+      <module fileurl="file://$PROJECT_DIR$/大厂刷题班1~5节课.iml" filepath="$PROJECT_DIR$/大厂刷题班1~5节课.iml" />
+      <module fileurl="file://$PROJECT_DIR$/第一节课/第一节课.iml" filepath="$PROJECT_DIR$/第一节课/第一节课.iml" />
+      <module fileurl="file://$PROJECT_DIR$/第三节课/第三节课.iml" filepath="$PROJECT_DIR$/第三节课/第三节课.iml" />
+      <module fileurl="file://$PROJECT_DIR$/src/第二节课.iml" filepath="$PROJECT_DIR$/src/第二节课.iml" />
+      <module fileurl="file://$PROJECT_DIR$/第四节/第四节.iml" filepath="$PROJECT_DIR$/第四节/第四节.iml" />
+      <module fileurl="file://$PROJECT_DIR$/第三节课/第四节课.iml" filepath="$PROJECT_DIR$/第三节课/第四节课.iml" />
+    </modules>
+  </component>
+</project>
