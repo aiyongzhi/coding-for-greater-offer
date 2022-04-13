@@ -73,5 +73,4 @@ public class 分糖果问题 {
         }
         return minCandy;
     }
-
 }
