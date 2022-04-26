@@ -1,6 +1,8 @@
 import com.sun.scenario.effect.impl.sw.sse.SSEBlend_SRC_OUTPeer;
 
 import java.util.Arrays;
+import java.util.Collection;
+import java.util.Collections;
 
 public class 最少的AOE次数 {
     /*
@@ -19,48 +21,48 @@ public class 最少的AOE次数 {
     //暴力解:每一次都尝试在任意位置进行AOE输出
     public static int minAOE1(int[] x, int[] hp, int range) {
         //生成法师在i号怪物处发动AOE技能，左侧最左打到的怪物编号，和右侧最右打到的怪物编号
-        int N = x.length;
-        int[] coverLeft = new int[N];
-        int[] coverRight = new int[N];
-        int L = 0;
-        int R = 0;
-        for (int i = 0; i < N; i++) {
-            while (x[i] - x[L] > range) {
+        int N=x.length;
+        int[] coverLeft=new int[N];
+        int[] coverRight=new int[N];
+        int L=0;
+        int R=0;
+        //时间复杂度为O(N)
+        for(int i=0;i<N;i++){
+            while(x[i]-x[L]>range) {
                 L++;
             }
-            while (R < N && x[R] - x[i] <= range) {
+            while(x[R]-x[i]<=range) {
                 R++;
             }
-
-            coverLeft[i] = L;
-            coverRight[i] = R - 1;
+            coverLeft[i]=L;
+            coverRight[i]=R-1;
         }
         return process(hp, coverLeft, coverRight);
     }
 
     //暴力递归 返回将怪物全部击杀的最少AOE攻击次数
     public static int process(int[] hp, int[] coverLeft, int[] coverRight) {
-        int N = hp.length;
-        int ans = Integer.MAX_VALUE;
-        for (int i = 0; i < N; i++) {
-            for (int f = coverLeft[i]; f <= coverRight[i]; f++) {
-                if (hp[f] > 0) {
-                    int[] next = aoe(hp, coverLeft[i], coverRight[i]);
-                    ans = Math.min(ans, 1 + process(next, coverLeft, coverRight));
+        int N=hp.length;
+        int min=Integer.MAX_VALUE;
+        //尝试当前状况下的第一次aoe攻击
+        for(int i=0;i<N;i++){
+            for(int f=coverLeft[i];f<=coverRight[i];f++){
+                if(hp[f]>0){
+                    int[] next=aoe(hp,coverLeft[i],coverRight[i]);
+                    min=Math.min(min,1+process(hp,coverLeft,coverRight));
                     break;
                 }
             }
         }
-        return ans == Integer.MAX_VALUE ? 0 : ans;
+        return min==Integer.MAX_VALUE?0:min;
     }
 
     public static int[] aoe(int[] hp, int L, int R) {
-        int N = hp.length;
-        int[] next = new int[N];
+        int N=hp.length;
+        int[] next=new int[N];
         System.arraycopy(hp, 0, next, 0, N);
-        //L..R号怪物被AOE命中
-        for (int i = L; i <= R; i++) {
-            next[i] -= (next[i] > 0 ? 1 : 0);
+        for(int i=L;i<=R;i++){
+            next[i]-=(next[i]>0?1:0);
         }
         return next;
     }
@@ -68,30 +70,30 @@ public class 最少的AOE次数 {
 
     //贪心算法优化
     public static int minAOE2(int[] x, int[] hp, int rang) {
-        int ans = 0;
-        int N = x.length;
-        for (int i = 0; i < N; i++) {
-            if (hp[i] > 0) {
-                int firePos = i;//法师攻击的位置
-                while (firePos < N && (x[firePos] - x[i] <= rang)) {
+        int ans=0;
+        int N=x.length;
+        for(int i=0;i<N;i++){
+            if(hp[i]>0){
+                int firePos=i;
+                while(firePos<N&&(x[firePos]-x[i]<=rang)){
                     firePos++;
                 }
-                ans += hp[i];
-                aoe(x, hp, i, firePos - 1, rang);
+                ans+=hp[i];
+                aoe(x,hp,i,firePos-1,rang);
             }
         }
         return ans;
     }
 
     public static void aoe(int[] x, int[] hp, int L, int firePos, int range) {
-        int N = x.length;
-        int R = firePos;
-        while (R < N && (x[R] - x[firePos] <= range)) {
+        int R=firePos;
+        int N=x.length;
+        while(R<N&&(x[R]-x[firePos])<=range){
             R++;
         }
-        int minus = hp[L];
-        for (int i = L; i < R; i++) {
-            hp[i] = Math.max(0, hp[i] - minus);
+        int minus=hp[L];
+        for(int i=L;i<R;i++){
+            hp[i]=Math.max(0,hp[i]-minus);
         }
     }
 

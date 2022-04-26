@@ -2,11 +2,8 @@
 <project version="4">
   <component name="ProjectModuleManager">
     <modules>
-      <module fileurl="file://$PROJECT_DIR$/大厂刷题班1~5节课/src/大厂刷题班1~5节课.iml" filepath="$PROJECT_DIR$/大厂刷题班1~5节课/src/大厂刷题班1~5节课.iml" />
-      <module fileurl="file://$PROJECT_DIR$/大厂刷题班1~5节课/第一节课/第一节课.iml" filepath="$PROJECT_DIR$/大厂刷题班1~5节课/第一节课/第一节课.iml" />
-      <module fileurl="file://$PROJECT_DIR$/大厂刷题班1~5节课/第三节课/第三节课.iml" filepath="$PROJECT_DIR$/大厂刷题班1~5节课/第三节课/第三节课.iml" />
-      <module fileurl="file://$PROJECT_DIR$/大厂刷题班1~5节课/第四节/第四节.iml" filepath="$PROJECT_DIR$/大厂刷题班1~5节课/第四节/第四节.iml" />
-      <module fileurl="file://$PROJECT_DIR$/.idea/算法与数据结构大厂刷题题库.iml" filepath="$PROJECT_DIR$/.idea/算法与数据结构大厂刷题题库.iml" />
+      <module fileurl="file://$PROJECT_DIR$/大厂刷题班6-10节课.iml" filepath="$PROJECT_DIR$/大厂刷题班6-10节课.iml" />
+      <module fileurl="file://$PROJECT_DIR$/第6节课/第6节课.iml" filepath="$PROJECT_DIR$/第6节课/第6节课.iml" />
     </modules>
   </component>
 </project>

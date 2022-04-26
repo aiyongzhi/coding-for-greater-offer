@@ -3,6 +3,7 @@ import java.util.HashSet;
 
 public class 最多的比赛场次 {
     /*
+    * 腾讯面试题
     * 给定一个数组ability,代表每一个人的能力值，再给定一个非负整数k
     * 只有两个人的能力差恰好为k，这两个人才能进行比赛
     * 返回最多同时有多少场比赛。
@@ -10,19 +11,21 @@ public class 最多的比赛场次 {
 
     /*
     * 暴力解:枚举所有可能性，尝试当前场次任意匹配，后序解的可能性
+    *
+    * 技巧: 贪心
     * */
     public static int process(int[] ability, int k){
         //base case
         if(ability==null||ability.length<2){
             return 0;
         }
-        //枚举出当前数组第一场比赛的所有可能性
         int max=Integer.MIN_VALUE;
+        //枚举出所有当前能凑对的第一场比赛
         for(int L=0;L<ability.length;L++){
             for(int R=L+1;R<ability.length;R++){
                 if(Math.abs(ability[L]-ability[R])==k){
                     int[] next=getNextArray(ability,L,R);
-                    max=Math.max(max,1+ process(next,k));
+                    max=Math.max(max,1+process(next,k));
                 }
             }
         }
@@ -54,31 +57,33 @@ public class 最多的比赛场次 {
             return 0;
         }
         Arrays.sort(ability);
-        //准备一个HashSet去重，即安排过比赛的人不要重复安排比赛
         int N=ability.length;
         boolean[] visited=new boolean[N];
+        //L会走到之前R成功的位置，用visited去重
         int L=0;
-        int R=0;
+        int R=L+1;
         int count=0;
-        while(L<N&&R<N){
+        while(R<N){
             if(visited[L]){
                 L++;
             }
-            else if(L==R){
-                R++;
-            }
             else{
-                int distance=ability[R]-ability[L];
-                if(distance==k){
-                    visited[R++]=true;
-                    L++;
-                    count++;
-                }
-                else if(distance>k){
-                    L++;
-                }
-                else{
+                if(L==R){//如果只有一个人
                     R++;
+                }
+                else{//L和R不是同一个
+                    int distance=ability[R]-ability[L];
+                    if(distance==k){//成功凑成一场比赛
+                        visited[R++]=true;
+                        L++;
+                        count++;
+                    }
+                    else if(distance<k){
+                        R++;
+                    }
+                    else{
+                        L++;
+                    }
                 }
             }
         }
@@ -102,9 +107,9 @@ public class 最多的比赛场次 {
 
     public static void main(String[] args) {
         int testTime=100000;
-        int maxValue=1000;
+        int maxValue=100;
         int maxLen=20;
-        int maxKValue=100;
+        int maxKValue=20;
         for(int i=0;i<testTime;i++){
             int k=(int)(Math.random()*maxKValue);
             int[] arr1=generateRandomArray(maxLen,maxValue);

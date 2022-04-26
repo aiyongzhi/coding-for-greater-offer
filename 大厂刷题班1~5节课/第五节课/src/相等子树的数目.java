@@ -33,11 +33,7 @@ public class 相等子树的数目 {
         if(node==null){
             return 0;
         }
-        int sumOfSameSubTree= process1(node.left)+process1(node.right);
-        if(isSameTree(node.left,node.right)){
-            sumOfSameSubTree+=1;
-        }
-        return sumOfSameSubTree;
+        return process1(node.left)+process1(node.right)+(isSameTree(node.left,node.right)?1:0);
     }
     //2:写一个递归看看两颗子树是否相同
     public static boolean isSameTree(TreeNode root1,TreeNode root2){
@@ -89,8 +85,8 @@ public class 相等子树的数目 {
         //整合出自己的信息
         StringBuilder sb=new StringBuilder();
         sb.append(leftInfo.str);
-        sb.append(node.val);
         sb.append(rightInfo.str);
+        sb.append(node.val);
         int ans=leftInfo.ans+rightInfo.ans+((leftInfo.str.equals(rightInfo.str))?1:0);
         return new Info(ans,hash.hashCode(sb.toString()));
     }
